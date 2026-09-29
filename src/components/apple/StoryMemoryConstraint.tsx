@@ -8,7 +8,6 @@ import { ArrowDown, RotateCcw } from 'lucide-react';
 const PROCESS_PAGES = [1, 2, 3, 4, 5, 6, 7];
 
 export function StoryMemoryConstraint() {
-  // Loaded pages in the 3 physical frames
   const [loadedPages, setLoadedPages] = useState<number[]>([1]);
 
   const handleLoadNext = () => {
@@ -33,7 +32,7 @@ export function StoryMemoryConstraint() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#0071e3]">
           The Constraint
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           Physical memory is finite.
         </h2>
         <p className="text-base sm:text-xl text-[#86868b] font-normal max-w-xl">
@@ -60,10 +59,10 @@ export function StoryMemoryConstraint() {
                   key={`process-page-${page}`}
                   className={`w-12 h-14 sm:w-14 sm:h-16 rounded-2xl flex flex-col items-center justify-center font-mono font-medium transition-all duration-300 ${
                     isResident
-                      ? 'bg-[#1d1d1f] text-white shadow-md scale-105'
+                      ? 'bg-[#1d1d1f] dark:bg-white text-white dark:text-black shadow-md scale-105'
                       : isPending
-                      ? 'bg-white border border-black/[0.1] text-[#1d1d1f] shadow-sm'
-                      : 'bg-black/[0.03] text-[#86868b] border border-transparent'
+                      ? 'bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] shadow-sm'
+                      : 'bg-black/[0.04] dark:bg-white/[0.05] text-[#86868b] border border-transparent'
                   }`}
                 >
                   <span className="text-lg sm:text-xl font-semibold">{page}</span>
@@ -84,7 +83,7 @@ export function StoryMemoryConstraint() {
           <ArrowDown className="w-4 h-4 animate-bounce text-[#0071e3]" />
         </div>
 
-        {/* 3 Physical Memory Frames (Apple machined-slot design) */}
+        {/* 3 Physical Memory Frames */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-lg">
           {[0, 1, 2].map((slotIdx) => {
             const pageInSlot = loadedPages[slotIdx];
@@ -111,12 +110,12 @@ export function StoryMemoryConstraint() {
                       className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl page-tile flex flex-col items-center justify-center my-auto"
                     >
                       <span className="text-xs text-[#86868b] font-mono">Page</span>
-                      <span className="text-3xl sm:text-4xl font-semibold font-mono text-[#1d1d1f]">
+                      <span className="text-3xl sm:text-4xl font-semibold font-mono text-[var(--tile-text)]">
                         {pageInSlot}
                       </span>
                     </motion.div>
                   ) : (
-                    <div className="my-auto flex flex-col items-center justify-center text-xs text-[#86868b] border border-dashed border-black/[0.1] w-20 h-20 sm:w-24 sm:h-24 rounded-2xl">
+                    <div className="my-auto flex flex-col items-center justify-center text-xs text-[#86868b] border border-dashed border-black/[0.1] dark:border-white/[0.1] w-20 h-20 sm:w-24 sm:h-24 rounded-2xl">
                       <span>Available</span>
                     </div>
                   )}
@@ -134,7 +133,7 @@ export function StoryMemoryConstraint() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-lg px-2">
           <p className="text-xs sm:text-sm text-[#86868b] font-normal text-center sm:text-left">
             {isFull ? (
-              <span className="text-[#1d1d1f] font-medium">
+              <span className="text-[var(--foreground)] font-medium">
                 Capacity reached: all 3 physical frames are occupied.
               </span>
             ) : (
@@ -148,7 +147,7 @@ export function StoryMemoryConstraint() {
             {isFull ? (
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-black/[0.1] text-xs font-medium text-[#1d1d1f] hover:bg-black/[0.04] transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[var(--border)] text-xs font-medium text-[var(--foreground)] hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset</span>
@@ -156,7 +155,7 @@ export function StoryMemoryConstraint() {
             ) : (
               <button
                 onClick={handleLoadNext}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black active:scale-95 transition-all shadow cursor-pointer"
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] active:scale-95 transition-all shadow cursor-pointer"
               >
                 <span>Load Page {loadedPages.length + 1} into RAM</span>
               </button>

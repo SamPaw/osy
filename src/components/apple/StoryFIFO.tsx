@@ -12,8 +12,6 @@ import {
   Pause,
   Minus,
   Plus,
-  Sliders,
-  Check,
   AlertCircle,
 } from 'lucide-react';
 
@@ -122,7 +120,7 @@ export function StoryFIFO() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#0071e3]">
           Algorithm 01
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           FIFO: First-In, First-Out
         </h2>
         <p className="text-base sm:text-xl text-[#86868b] font-normal max-w-xl">
@@ -142,7 +140,7 @@ export function StoryFIFO() {
                 setInputString(referenceString.join(' '));
                 setShowEditModal(true);
               }}
-              className="text-[#0071e3] hover:underline"
+              className="text-[#0071e3] hover:underline cursor-pointer"
             >
               Custom String
             </button>
@@ -166,9 +164,9 @@ export function StoryFIFO() {
                       ? 'bg-[#0071e3] text-white shadow-lg scale-105'
                       : isPast
                       ? stepData?.isHit
-                        ? 'bg-[#34c759]/10 text-[#34c759] border border-[#34c759]/20'
-                        : 'bg-[#ff3b30]/10 text-[#ff3b30] border border-[#ff3b30]/20'
-                      : 'bg-white border border-black/[0.08] text-[#86868b] hover:text-[#1d1d1f]'
+                        ? 'bg-[#34c759]/15 text-[#34c759] border border-[#34c759]/30'
+                        : 'bg-[#ff3b30]/15 text-[#ff3b30] border border-[#ff3b30]/30'
+                      : 'bg-[var(--card)] border border-[var(--border)] text-[#86868b] hover:text-[var(--foreground)]'
                   }`}
                 >
                   <span className="text-[10px] opacity-60">#{idx + 1}</span>
@@ -187,8 +185,8 @@ export function StoryFIFO() {
               <span
                 className={`font-semibold px-2.5 py-0.5 rounded-full ${
                   currentStep.isHit
-                    ? 'bg-[#34c759]/10 text-[#34c759]'
-                    : 'bg-[#ff3b30]/10 text-[#ff3b30]'
+                    ? 'bg-[#34c759]/15 text-[#34c759]'
+                    : 'bg-[#ff3b30]/15 text-[#ff3b30]'
                 }`}
               >
                 {currentStep.isHit ? 'PAGE HIT' : 'PAGE FAULT'}
@@ -196,7 +194,7 @@ export function StoryFIFO() {
             )}
           </div>
 
-          {/* Precision machined slots */}
+          {/* Machined slots */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
             {displayFrames.map((pageNumber, frameIdx) => {
               const isEmpty = pageNumber === null;
@@ -209,9 +207,9 @@ export function StoryFIFO() {
                   key={`fifo-frame-${frameIdx}`}
                   className={`h-36 sm:h-40 rounded-3xl memory-frame-slot p-3 flex flex-col justify-between items-center transition-all duration-300 ${
                     isHitFrame
-                      ? 'border-[#34c759] bg-[#34c759]/5'
+                      ? 'border-[#34c759] bg-[#34c759]/10'
                       : isEvictedSlot && !currentStep?.isHit
-                      ? 'border-[#ff3b30] bg-[#ff3b30]/5'
+                      ? 'border-[#ff3b30] bg-[#ff3b30]/10'
                       : ''
                   }`}
                 >
@@ -235,7 +233,7 @@ export function StoryFIFO() {
                         className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl page-tile flex flex-col items-center justify-center my-auto"
                       >
                         <span className="text-[10px] text-[#86868b] font-mono">Page</span>
-                        <span className="text-2xl sm:text-3xl font-semibold font-mono text-[#1d1d1f]">
+                        <span className="text-2xl sm:text-3xl font-semibold font-mono text-[var(--tile-text)]">
                           {pageNumber}
                         </span>
                       </motion.div>
@@ -257,10 +255,10 @@ export function StoryFIFO() {
 
         {/* Arrival Order Ribbon: ① ② ③ */}
         {queue.length > 0 && (
-          <div className="w-full max-w-xl flex items-center justify-between px-4 py-2.5 rounded-2xl bg-white border border-black/[0.05] text-xs font-mono text-[#86868b]">
+          <div className="w-full max-w-xl flex items-center justify-between px-4 py-2.5 rounded-2xl bg-[var(--card)] border border-[var(--border)] text-xs font-mono text-[#86868b]">
             <div className="flex items-center gap-2">
               <span className="text-[#ff3b30] font-semibold">Oldest (Next Victim):</span>
-              <span className="font-bold text-[#1d1d1f]">Page {queue[0]}</span>
+              <span className="font-bold text-[var(--foreground)]">Page {queue[0]}</span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -269,8 +267,8 @@ export function StoryFIFO() {
                   key={`q-order-${p}`}
                   className={`px-2 py-0.5 rounded-lg ${
                     qIdx === 0
-                      ? 'bg-[#ff3b30]/10 text-[#ff3b30] font-bold'
-                      : 'bg-black/[0.04] text-[#1d1d1f]'
+                      ? 'bg-[#ff3b30]/15 text-[#ff3b30] font-bold'
+                      : 'bg-black/[0.04] dark:bg-white/[0.06] text-[var(--foreground)]'
                   }`}
                 >
                   {p} {CIRCLE_BADGES[qIdx] || `#${qIdx + 1}`}
@@ -282,7 +280,7 @@ export function StoryFIFO() {
 
         {/* Concise One-Sentence Teacher Rationale */}
         <div className="w-full max-w-xl text-center">
-          <p className="text-sm sm:text-base font-normal text-[#1d1d1f] leading-snug">
+          <p className="text-sm sm:text-base font-normal text-[var(--foreground)] leading-snug">
             {currentStep ? (
               <span>
                 <strong className={currentStep.isHit ? 'text-[#34c759]' : 'text-[#ff3b30]'}>
@@ -301,7 +299,7 @@ export function StoryFIFO() {
         {/* Elegant Minimal Controls */}
         <div className="flex flex-wrap items-center justify-center gap-3">
           {/* Frames Counter */}
-          <div className="flex items-center rounded-full bg-white border border-black/[0.08] p-1 gap-1">
+          <div className="flex items-center rounded-full bg-[var(--card)] border border-[var(--border)] p-1 gap-1">
             <button
               onClick={() => {
                 if (frameCount > 1) {
@@ -311,11 +309,11 @@ export function StoryFIFO() {
                 }
               }}
               disabled={frameCount <= 1}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[#1d1d1f] hover:bg-black/[0.05] disabled:opacity-30 cursor-pointer"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 cursor-pointer"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-14 text-center text-xs font-mono font-semibold text-[#1d1d1f]">
+            <span className="w-14 text-center text-xs font-mono font-semibold text-[var(--foreground)]">
               {frameCount} Frames
             </span>
             <button
@@ -327,7 +325,7 @@ export function StoryFIFO() {
                 }
               }}
               disabled={frameCount >= 8}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[#1d1d1f] hover:bg-black/[0.05] disabled:opacity-30 cursor-pointer"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>
@@ -336,7 +334,7 @@ export function StoryFIFO() {
           {/* Stepping controls */}
           <button
             onClick={handleReset}
-            className="p-3 rounded-full bg-white border border-black/[0.08] text-[#1d1d1f] hover:bg-black/[0.05] transition-all cursor-pointer"
+            className="p-3 rounded-full bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-all cursor-pointer"
             title="Reset"
           >
             <RotateCcw className="w-4 h-4" />
@@ -345,7 +343,7 @@ export function StoryFIFO() {
           <button
             onClick={handlePrev}
             disabled={currentStepIndex < 0}
-            className="px-4 py-2.5 rounded-full bg-white border border-black/[0.08] text-xs font-medium text-[#1d1d1f] hover:bg-black/[0.05] disabled:opacity-30 transition-all cursor-pointer"
+            className="px-4 py-2.5 rounded-full bg-[var(--card)] border border-[var(--border)] text-xs font-medium text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 transition-all cursor-pointer"
           >
             Previous
           </button>
@@ -355,7 +353,7 @@ export function StoryFIFO() {
               sound.click();
               setIsPlaying((p) => !p);
             }}
-            className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black active:scale-95 transition-all shadow cursor-pointer"
+            className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] active:scale-95 transition-all shadow cursor-pointer"
           >
             {isPlaying ? (
               <>
@@ -373,7 +371,7 @@ export function StoryFIFO() {
           <button
             onClick={handleNext}
             disabled={currentStepIndex >= referenceString.length - 1}
-            className="px-5 py-2.5 rounded-full bg-white border border-black/[0.12] text-xs font-semibold text-[#1d1d1f] hover:bg-black/[0.05] disabled:opacity-30 transition-all cursor-pointer shadow-sm"
+            className="px-5 py-2.5 rounded-full bg-[var(--card)] border border-[var(--border)] text-xs font-semibold text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 transition-all cursor-pointer shadow-sm"
           >
             Next Reference →
           </button>
@@ -390,16 +388,16 @@ export function StoryFIFO() {
           </span>
           <span>•</span>
           <span>
-            Fault Rate: <strong className="text-[#1d1d1f]">{currentStep?.faultRate ?? 0}%</strong>
+            Fault Rate: <strong className="text-[var(--foreground)]">{currentStep?.faultRate ?? 0}%</strong>
           </span>
         </div>
       </div>
 
       {/* Custom String Modal */}
       {showEditModal && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white rounded-[2rem] p-6 max-w-md w-full shadow-2xl border border-black/[0.08] flex flex-col gap-4">
-            <h3 className="text-lg font-semibold text-[#1d1d1f]">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[var(--card)] rounded-[2rem] p-6 max-w-md w-full shadow-2xl border border-[var(--border)] flex flex-col gap-4">
+            <h3 className="text-lg font-semibold text-[var(--foreground)]">
               Custom Reference String
             </h3>
             <p className="text-xs text-[#86868b]">
@@ -414,7 +412,7 @@ export function StoryFIFO() {
                   setInputString(e.target.value);
                   setErrorMsg(null);
                 }}
-                className="w-full px-4 py-2.5 rounded-xl border border-black/[0.1] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-[#0071e3]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[var(--border)] bg-transparent text-[var(--foreground)] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-[#0071e3]"
               />
 
               {errorMsg && (
@@ -428,13 +426,13 @@ export function StoryFIFO() {
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="px-4 py-2 text-xs text-[#86868b] hover:text-[#1d1d1f]"
+                  className="px-4 py-2 text-xs text-[#86868b] hover:text-[var(--foreground)]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black"
+                  className="px-5 py-2 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7]"
                 >
                   Apply
                 </button>

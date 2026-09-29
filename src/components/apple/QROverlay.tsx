@@ -5,8 +5,6 @@ import { QRCodeSVG } from 'qrcode.react';
 import { X, Smartphone, Copy, Check } from 'lucide-react';
 import { sound } from '@/lib/sound';
 
-const PRODUCTION_URL = 'https://os.platesight.in';
-
 interface QROverlayProps {
   isOpen: boolean;
   onClose: () => void;
@@ -14,27 +12,34 @@ interface QROverlayProps {
 
 export function QROverlay({ isOpen, onClose }: QROverlayProps) {
   const [copied, setCopied] = useState(false);
+  const [qrUrl, setQrUrl] = useState('https://os-presentation.local');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setQrUrl(window.location.origin);
+    }
+  }, []);
 
   if (!isOpen) return null;
 
   const handleCopy = () => {
     sound.click();
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(PRODUCTION_URL);
+      navigator.clipboard.writeText(qrUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-[0_25px_60px_rgba(0,0,0,0.15)] border border-black/[0.06] flex flex-col items-center gap-6 text-center relative select-none">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+      <div className="bg-white dark:bg-[#1c1c1e] rounded-[2.5rem] p-8 max-w-sm w-full shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-black/[0.06] dark:border-white/[0.1] flex flex-col items-center gap-6 text-center relative select-none transition-colors duration-300">
         <button
           onClick={() => {
             sound.click();
             onClose();
           }}
-          className="absolute top-5 right-5 p-2 rounded-full text-[#86868b] hover:text-[#1d1d1f] hover:bg-black/[0.05] transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-full text-[#86868b] hover:text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -44,7 +49,7 @@ export function QROverlay({ isOpen, onClose }: QROverlayProps) {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <h3 className="text-xl font-semibold text-[#1d1d1f] tracking-tight">
+          <h3 className="text-xl font-semibold text-[var(--foreground)] tracking-tight">
             Continue on your phone
           </h3>
           <p className="text-xs text-[#86868b] leading-relaxed">
@@ -52,22 +57,22 @@ export function QROverlay({ isOpen, onClose }: QROverlayProps) {
           </p>
         </div>
 
-        <div className="p-3 bg-[#f5f5f7] rounded-3xl border border-black/[0.04]">
+        <div className="p-3 bg-white rounded-3xl border border-black/[0.04]">
           <QRCodeSVG
-            value={PRODUCTION_URL}
+            value={qrUrl}
             size={180}
             level="M"
-            bgColor="#f5f5f7"
+            bgColor="#ffffff"
             fgColor="#1d1d1f"
             includeMargin={false}
           />
         </div>
 
-        <div className="w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-[#f5f5f7] text-xs font-mono text-[#1d1d1f]">
-          <span className="font-medium text-[#0071e3]">os.platesight.in</span>
+        <div className="w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-[#f5f5f7] dark:bg-[#2c2c2e] text-xs font-mono text-[var(--foreground)]">
+          <span className="font-medium text-[#0071e3]">Mobile Web Link</span>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1 text-[#86868b] hover:text-[#1d1d1f] transition-colors cursor-pointer"
+            className="flex items-center gap-1 text-[#86868b] hover:text-[var(--foreground)] transition-colors cursor-pointer"
           >
             {copied ? (
               <>

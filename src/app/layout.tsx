@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,7 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#fbfbfd",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbfbfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -21,22 +25,18 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
+  title: "Page Replacement Algorithms — FIFO vs LRU",
   description:
     "An Apple-inspired interactive educational experience for Operating Systems. Explore FIFO and LRU page replacement algorithms, physical memory dynamics, and Belady's anomaly.",
-  authors: [{ name: "PlateSight" }],
-  metadataBase: new URL("https://os.platesight.in"),
   openGraph: {
-    title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
+    title: "Page Replacement Algorithms — FIFO vs LRU",
     description:
       "When memory runs out, which page should leave? An interactive exploration of FIFO and LRU.",
-    url: "https://os.platesight.in",
-    siteName: "PlateSight OS",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
+    title: "Page Replacement Algorithms — FIFO vs LRU",
     description:
       "When memory runs out, which page should leave? An interactive exploration of FIFO and LRU.",
   },
@@ -51,9 +51,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-[#fbfbfd] text-[#1d1d1f] selection:bg-[#0071e3]/15 selection:text-[#0071e3]">
-        {children}
+      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)] selection:bg-[#0071e3]/20 selection:text-[#0071e3]">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

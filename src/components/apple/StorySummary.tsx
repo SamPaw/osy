@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowUp, Smartphone, RotateCcw } from 'lucide-react';
+import { Smartphone, RotateCcw } from 'lucide-react';
 import { sound } from '@/lib/sound';
 
 interface StorySummaryProps {
@@ -23,7 +23,7 @@ export function StorySummary({ onRestart, onOpenQR }: StorySummaryProps) {
         <div className="flex flex-col gap-4">
           <p className="text-3xl sm:text-4xl md:text-5xl font-light text-[#86868b] tracking-tight">
             FIFO asks: <br />
-            <strong className="text-[#1d1d1f] font-semibold">&ldquo;Who arrived first?&rdquo;</strong>
+            <strong className="text-[var(--foreground)] font-semibold">&ldquo;Who arrived first?&rdquo;</strong>
           </p>
 
           <p className="text-3xl sm:text-4xl md:text-5xl font-light text-[#86868b] tracking-tight mt-4">
@@ -32,7 +32,7 @@ export function StorySummary({ onRestart, onOpenQR }: StorySummaryProps) {
           </p>
         </div>
 
-        <p className="text-xl sm:text-2xl text-[#1d1d1f] font-medium tracking-tight mt-6 max-w-xl">
+        <p className="text-xl sm:text-2xl text-[var(--foreground)] font-medium tracking-tight mt-6 max-w-xl">
           Same memory. Same reference stream. Different replacement decisions.
         </p>
 
@@ -43,7 +43,7 @@ export function StorySummary({ onRestart, onOpenQR }: StorySummaryProps) {
               sound.click();
               onRestart();
             }}
-            className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#1d1d1f] text-white text-sm font-medium hover:bg-black active:scale-95 transition-all shadow-md cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-sm font-medium hover:bg-black dark:hover:bg-[#f5f5f7] active:scale-95 transition-all shadow-md cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Return to Beginning</span>
@@ -54,7 +54,7 @@ export function StorySummary({ onRestart, onOpenQR }: StorySummaryProps) {
               sound.click();
               onOpenQR();
             }}
-            className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-white border border-black/[0.1] text-[#1d1d1f] text-sm font-medium hover:bg-black/[0.04] active:scale-95 transition-all cursor-pointer shadow-sm"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-white dark:bg-[#1c1c1e] border border-black/[0.1] dark:border-white/[0.12] text-[var(--foreground)] text-sm font-medium hover:bg-black/[0.04] dark:hover:bg-white/[0.04] active:scale-95 transition-all cursor-pointer shadow-sm"
           >
             <Smartphone className="w-4 h-4 text-[#0071e3]" />
             <span>Scan Phone QR Code</span>
@@ -63,9 +63,9 @@ export function StorySummary({ onRestart, onOpenQR }: StorySummaryProps) {
       </div>
 
       {/* Footer credits */}
-      <footer className="w-full pt-8 border-t border-black/[0.06] flex flex-wrap items-center justify-between text-xs text-[#86868b]">
-        <span>PlateSight OS • Interactive Operating Systems</span>
-        <span>os.platesight.in</span>
+      <footer className="w-full pt-8 border-t border-black/[0.06] dark:border-white/[0.08] flex flex-wrap items-center justify-between text-xs text-[#86868b]">
+        <span>Operating Systems • Interactive Lecture</span>
+        <span>Virtual Memory Architecture</span>
       </footer>
     </section>
   );

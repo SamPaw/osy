@@ -40,7 +40,7 @@ export function StoryBelady() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#ff3b30]">
           Algorithmic Paradox
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           More memory. <br className="hidden sm:inline" />
           More page faults?
         </h2>
@@ -66,10 +66,10 @@ export function StoryBelady() {
                 }}
                 className={`flex-shrink-0 w-10 h-13 sm:w-11 sm:h-14 rounded-2xl flex flex-col items-center justify-center font-mono transition-all duration-200 active:scale-95 cursor-pointer ${
                   isCurrent
-                    ? 'bg-[#1d1d1f] text-white shadow-lg scale-105'
+                    ? 'bg-[#1d1d1f] dark:bg-white text-white dark:text-black shadow-lg scale-105'
                     : isPast
-                    ? 'bg-[#f5f5f7] text-[#1d1d1f]'
-                    : 'bg-white border border-black/[0.08] text-[#86868b]'
+                    ? 'bg-[#f5f5f7] dark:bg-[#2c2c2e] text-[var(--foreground)]'
+                    : 'bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.1] text-[#86868b]'
                 }`}
               >
                 <span className="text-[9px] opacity-60">#{idx + 1}</span>
@@ -106,9 +106,9 @@ export function StoryBelady() {
         {/* Side-by-Side: 3 Frames vs 4 Frames */}
         <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* 3 Frames */}
-          <div className="p-6 rounded-[2rem] bg-white border border-black/[0.06] shadow-sm flex flex-col gap-3">
-            <div className="flex items-center justify-between pb-2 border-b border-black/[0.06]">
-              <h3 className="font-semibold text-base text-[#1d1d1f]">FIFO (3 Frames)</h3>
+          <div className="p-6 rounded-[2rem] bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm flex flex-col gap-3">
+            <div className="flex items-center justify-between pb-2 border-b border-black/[0.06] dark:border-white/[0.08]">
+              <h3 className="font-semibold text-base text-[var(--foreground)]">FIFO (3 Frames)</h3>
               <span className="text-xs font-mono text-[#ff3b30] font-semibold">
                 Faults: {step3?.pageFaultCount ?? 0} / 9
               </span>
@@ -120,7 +120,7 @@ export function StoryBelady() {
                   key={`f3-${fIdx}`}
                   className="h-24 rounded-2xl memory-frame-slot p-2 flex flex-col items-center justify-center"
                 >
-                  <span className="text-xl font-semibold font-mono text-[#1d1d1f]">
+                  <span className="text-xl font-semibold font-mono text-[var(--foreground)]">
                     {step3?.frames[fIdx] ?? '—'}
                   </span>
                 </div>
@@ -128,14 +128,14 @@ export function StoryBelady() {
             </div>
 
             <div className="text-[11px] font-mono text-[#86868b] text-center pt-1">
-              Final result: <strong className="text-[#1d1d1f]">9 total page faults</strong>
+              Final result: <strong className="text-[var(--foreground)]">9 total page faults</strong>
             </div>
           </div>
 
           {/* 4 Frames */}
-          <div className="p-6 rounded-[2rem] bg-white border border-black/[0.06] shadow-sm flex flex-col gap-3">
-            <div className="flex items-center justify-between pb-2 border-b border-black/[0.06]">
-              <h3 className="font-semibold text-base text-[#1d1d1f]">
+          <div className="p-6 rounded-[2rem] bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm flex flex-col gap-3">
+            <div className="flex items-center justify-between pb-2 border-b border-black/[0.06] dark:border-white/[0.08]">
+              <h3 className="font-semibold text-base text-[var(--foreground)]">
                 FIFO (4 Frames — +1 Frame!)
               </h3>
               <span className="text-xs font-mono text-[#ff3b30] font-semibold">
@@ -149,7 +149,7 @@ export function StoryBelady() {
                   key={`f4-${fIdx}`}
                   className="h-24 rounded-2xl memory-frame-slot p-2 flex flex-col items-center justify-center"
                 >
-                  <span className="text-xl font-semibold font-mono text-[#1d1d1f]">
+                  <span className="text-xl font-semibold font-mono text-[var(--foreground)]">
                     {step4?.frames[fIdx] ?? '—'}
                   </span>
                 </div>
@@ -164,7 +164,7 @@ export function StoryBelady() {
 
         {/* The Mathematical Reason (Stack Algorithm Property) */}
         <div className="w-full max-w-xl text-center flex flex-col gap-1.5 pt-2">
-          <h4 className="text-sm font-semibold text-[#1d1d1f]">
+          <h4 className="text-sm font-semibold text-[var(--foreground)]">
             Why does this occur?
           </h4>
           <p className="text-xs sm:text-sm text-[#86868b] leading-relaxed font-normal">
@@ -177,7 +177,7 @@ export function StoryBelady() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleReset}
-            className="p-3 rounded-full bg-white border border-black/[0.08] text-[#1d1d1f] hover:bg-black/[0.05] transition-all cursor-pointer"
+            className="p-3 rounded-full bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.1] text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-all cursor-pointer"
             title="Reset"
           >
             <RotateCcw className="w-4 h-4" />
@@ -186,7 +186,7 @@ export function StoryBelady() {
           <button
             onClick={handleNext}
             disabled={currentStepIndex >= BELADY_STRING.length - 1}
-            className="px-6 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black disabled:opacity-30 transition-all cursor-pointer shadow"
+            className="px-6 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] disabled:opacity-30 transition-all cursor-pointer shadow"
           >
             Step Through Sequence →
           </button>

@@ -173,7 +173,7 @@ export function StoryOrchestrator() {
 
   // Main Apple-style Storytelling Canvas
   return (
-    <div className="w-full bg-[#fbfbfd] text-[#1d1d1f] relative min-h-screen">
+    <div className="w-full bg-[var(--background)] text-[var(--foreground)] relative min-h-screen transition-colors duration-300">
       {/* Discreet floating Apple navigation header */}
       <NavigationOverlay
         currentSectionTitle={activeSectionTitle}
@@ -193,52 +193,52 @@ export function StoryOrchestrator() {
         </div>
 
         {/* Section 2: Memory Constraint */}
-        <div id="sec-constraint" className="w-full border-t border-black/[0.04]">
+        <div id="sec-constraint" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryMemoryConstraint />
         </div>
 
         {/* Section 3: Page Fault */}
-        <div id="sec-fault" className="w-full border-t border-black/[0.04]">
+        <div id="sec-fault" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryPageFault />
         </div>
 
         {/* Section 4: FIFO Simulation */}
-        <div id="sec-fifo" className="w-full border-t border-black/[0.04]">
+        <div id="sec-fifo" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryFIFO />
         </div>
 
         {/* Section 5: The Pivot (Arrival vs Recency) */}
-        <div id="sec-pivot" className="w-full border-t border-black/[0.04]">
+        <div id="sec-pivot" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryThePivot />
         </div>
 
         {/* Section 6: LRU Simulation */}
-        <div id="sec-lru" className="w-full border-t border-black/[0.04]">
+        <div id="sec-lru" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryLRU />
         </div>
 
         {/* Section 7: Live Synchronous Comparison */}
-        <div id="sec-compare" className="w-full border-t border-black/[0.04]">
+        <div id="sec-compare" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryComparison />
         </div>
 
         {/* Section 8: Belady's Anomaly */}
-        <div id="sec-belady" className="w-full border-t border-black/[0.04]">
+        <div id="sec-belady" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryBelady />
         </div>
 
         {/* Section 9: Architectural Matrix */}
-        <div id="sec-matrix" className="w-full border-t border-black/[0.04]">
+        <div id="sec-matrix" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryComparisonMatrix />
         </div>
 
         {/* Section 10: Whiteboard Quiz */}
-        <div id="sec-quiz" className="w-full border-t border-black/[0.04]">
+        <div id="sec-quiz" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StoryQuiz />
         </div>
 
         {/* Section 11: Summary */}
-        <div id="sec-summary" className="w-full border-t border-black/[0.04]">
+        <div id="sec-summary" className="w-full border-t border-black/[0.04] dark:border-white/[0.06]">
           <StorySummary
             onRestart={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });

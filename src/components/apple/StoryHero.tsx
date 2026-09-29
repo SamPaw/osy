@@ -29,7 +29,7 @@ export function StoryHero({ onScrollDown }: StoryHeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold tracking-tight text-[#1d1d1f] leading-[0.95]"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold tracking-tight text-[var(--foreground)] leading-[0.95]"
         >
           Page <br className="hidden sm:inline" />
           Replacement.
@@ -42,7 +42,7 @@ export function StoryHero({ onScrollDown }: StoryHeroProps) {
           className="flex items-center gap-3 text-2xl sm:text-3xl md:text-4xl font-light text-[#86868b] tracking-tight"
         >
           <span>FIFO</span>
-          <span className="text-[#d2d2d7]">×</span>
+          <span className="text-[#86868b]/40">×</span>
           <span>LRU</span>
         </motion.div>
 
@@ -65,10 +65,10 @@ export function StoryHero({ onScrollDown }: StoryHeroProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.8 }}
-        className="flex flex-col items-center gap-2 text-xs text-[#86868b] hover:text-[#1d1d1f] transition-colors pb-6 cursor-pointer"
+        className="flex flex-col items-center gap-2 text-xs text-[#86868b] hover:text-[var(--foreground)] transition-colors pb-6 cursor-pointer"
       >
         <span>Scroll to begin the story</span>
-        <ArrowDown className="w-4 h-4 animate-bounce" />
+        <ArrowDown className="w-4 h-4 animate-bounce text-[#0071e3]" />
       </motion.button>
     </section>
   );

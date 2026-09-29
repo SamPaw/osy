@@ -1,14 +1,41 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fbfbfd;
   --foreground: #1d1d1f;
   --muted: #86868b;
-  --border: #e5e5ea;
+  --border: rgba(0, 0, 0, 0.08);
   --card: #ffffff;
+  --slot-bg: #f5f5f7;
+  --slot-border: #e5e5ea;
+  --tile-bg: #ffffff;
+  --tile-border: rgba(0, 0, 0, 0.08);
+  --tile-text: #1d1d1f;
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(0, 0, 0, 0.06);
   --accent-blue: #0071e3;
   --accent-green: #34c759;
   --accent-red: #ff3b30;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #f5f5f7;
+  --muted: #86868b;
+  --border: rgba(255, 255, 255, 0.12);
+  --card: #1c1c1e;
+  --slot-bg: #141416;
+  --slot-border: #2c2c2e;
+  --tile-bg: #242426;
+  --tile-border: rgba(255, 255, 255, 0.12);
+  --tile-text: #ffffff;
+  --glass-bg: rgba(28, 28, 30, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent-blue: #2997ff;
+  --accent-green: #30d158;
+  --accent-red: #ff453a;
 }
 
 @theme inline {
@@ -20,42 +47,41 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #fbfbfd;
-  color: #1d1d1f;
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
-  background-color: #fbfbfd;
-  color: #1d1d1f;
+  background-color: var(--background);
+  color: var(--foreground);
   overflow-x: hidden;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Apple-style frosted glass effect */
 .apple-glass {
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.apple-glass-dark {
-  background: rgba(29, 29, 31, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--glass-border);
 }
 
 /* Apple subtle card elevation */
 .apple-card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--card);
+  border: 1px solid var(--border);
   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.dark .apple-card {
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4);
 }
 
 .apple-card-hover {
@@ -68,16 +94,22 @@ body {
 
 /* Physical Memory Frame Slot Styling */
 .memory-frame-slot {
-  background: #f5f5f7;
-  border: 1.5px solid #e5e5ea;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  background: var(--slot-bg);
+  border: 1.5px solid var(--slot-border);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* Tangible Page Tile */
 .page-tile {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--tile-bg);
+  border: 1px solid var(--tile-border);
   box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.dark .page-tile {
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5);
 }
 
 /* Hide scrollbars cleanly */
@@ -98,9 +130,9 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(128, 128, 128, 0.2);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(128, 128, 128, 0.4);
 }

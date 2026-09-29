@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { sound } from '@/lib/sound';
-import { AlertCircle, ArrowDown, RotateCcw } from 'lucide-react';
+import { AlertCircle, RotateCcw } from 'lucide-react';
 
 export function StoryPageFault() {
   const [stage, setStage] = useState<'IDLE' | 'APPROACH' | 'FAULT'>('IDLE');
@@ -30,7 +30,7 @@ export function StoryPageFault() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#ff3b30]">
           The Collision
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           What is a Page Fault?
         </h2>
         <p className="text-base sm:text-xl text-[#86868b] font-normal max-w-xl">
@@ -57,12 +57,12 @@ export function StoryPageFault() {
             transition={{ type: 'spring', stiffness: 260, damping: 20 }}
             className={`w-24 h-24 rounded-3xl page-tile flex flex-col items-center justify-center transition-colors duration-300 ${
               stage === 'FAULT'
-                ? 'border-[#ff3b30]/30 shadow-[0_12px_30px_rgba(255,59,48,0.12)]'
+                ? 'border-[#ff3b30]/40 shadow-[0_12px_30px_rgba(255,59,48,0.2)]'
                 : ''
             }`}
           >
             <span className="text-xs text-[#86868b] font-mono">Page</span>
-            <span className="text-4xl font-semibold font-mono text-[#1d1d1f]">
+            <span className="text-4xl font-semibold font-mono text-[var(--tile-text)]">
               4
             </span>
           </motion.div>
@@ -106,7 +106,7 @@ export function StoryPageFault() {
               <div
                 key={`page-fault-frame-${fIdx}`}
                 className={`flex-1 w-full sm:w-36 h-32 sm:h-40 rounded-3xl memory-frame-slot p-3 flex flex-col justify-between items-center transition-all duration-300 ${
-                  stage === 'FAULT' ? 'border-[#ff3b30]/25' : ''
+                  stage === 'FAULT' ? 'border-[#ff3b30]/30' : ''
                 }`}
               >
                 <span className="text-[11px] font-mono text-[#86868b]">
@@ -115,7 +115,7 @@ export function StoryPageFault() {
 
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl page-tile flex flex-col items-center justify-center my-auto">
                   <span className="text-[10px] text-[#86868b] font-mono">Page</span>
-                  <span className="text-2xl sm:text-3xl font-semibold font-mono text-[#1d1d1f]">
+                  <span className="text-2xl sm:text-3xl font-semibold font-mono text-[var(--tile-text)]">
                     {pageVal}
                   </span>
                 </div>
@@ -132,7 +132,7 @@ export function StoryPageFault() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-lg px-2">
           <p className="text-xs sm:text-sm text-[#86868b] font-normal text-center sm:text-left">
             {stage === 'FAULT' ? (
-              <span className="text-[#1d1d1f] font-medium">
+              <span className="text-[var(--foreground)] font-medium">
                 The Dilemma: To load Page 4, one of 1, 2, or 3 must be evicted. Which one?
               </span>
             ) : (
@@ -144,7 +144,7 @@ export function StoryPageFault() {
             {stage === 'FAULT' ? (
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-black/[0.1] text-xs font-medium text-[#1d1d1f] hover:bg-black/[0.04] transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[var(--border)] text-xs font-medium text-[var(--foreground)] hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset</span>
@@ -152,7 +152,7 @@ export function StoryPageFault() {
             ) : (
               <button
                 onClick={handleSimulateRequest}
-                className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black active:scale-95 transition-all shadow cursor-pointer"
+                className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] active:scale-95 transition-all shadow cursor-pointer"
               >
                 <span>Request Page 4</span>
               </button>

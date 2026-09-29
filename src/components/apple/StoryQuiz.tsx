@@ -145,7 +145,7 @@ export function StoryQuiz() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#0071e3]">
           Interactive Whiteboard Check
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           Put your intuition to the test.
         </h2>
         <p className="text-base sm:text-xl text-[#86868b] font-normal max-w-xl">
@@ -156,11 +156,11 @@ export function StoryQuiz() {
       {/* Main Interactive Stage */}
       <div className="w-full flex flex-col items-center gap-8 my-auto py-4">
         {/* Scenario description */}
-        <div className="p-6 rounded-[2rem] bg-white border border-black/[0.06] shadow-sm flex flex-col items-center text-center gap-4 w-full">
+        <div className="p-6 rounded-[2rem] bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm flex flex-col items-center text-center gap-4 w-full transition-colors duration-300">
           <span className="text-xs font-mono uppercase tracking-wider text-[#0071e3] font-semibold">
             Challenge {currentIdx + 1} of {QUIZ_ITEMS.length}: {q.title}
           </span>
-          <p className="text-base sm:text-lg text-[#1d1d1f] font-normal max-w-xl leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--foreground)] font-normal max-w-xl leading-relaxed">
             {q.scenario}
           </p>
 
@@ -172,14 +172,14 @@ export function StoryQuiz() {
                 className="w-20 h-24 rounded-2xl memory-frame-slot p-2 flex flex-col justify-between items-center"
               >
                 <span className="text-[10px] font-mono text-[#86868b]">F{fIdx + 1}</span>
-                <span className="text-2xl font-semibold font-mono text-[#1d1d1f] my-auto">
+                <span className="text-2xl font-semibold font-mono text-[var(--foreground)] my-auto">
                   {pageVal}
                 </span>
                 <span className="text-[9px] font-mono text-[#86868b]">In RAM</span>
               </div>
             ))}
 
-            <div className="flex items-center gap-2 pl-4 border-l border-black/[0.08]">
+            <div className="flex items-center gap-2 pl-4 border-l border-black/[0.08] dark:border-white/[0.1]">
               <div className="w-20 h-24 rounded-2xl bg-[#0071e3]/10 border border-[#0071e3]/30 p-2 flex flex-col justify-between items-center">
                 <span className="text-[10px] font-mono text-[#0071e3]">Target</span>
                 <span className="text-2xl font-semibold font-mono text-[#0071e3] my-auto">
@@ -209,11 +209,11 @@ export function StoryQuiz() {
                 className={`p-4 rounded-2xl border text-center flex flex-col justify-center min-h-[75px] transition-all cursor-pointer ${
                   hasAnswered
                     ? opt.isCorrect
-                      ? 'bg-[#34c759]/10 border-[#34c759] text-[#1d1d1f] shadow-sm'
+                      ? 'bg-[#34c759]/10 border-[#34c759] text-[var(--foreground)] shadow-sm'
                       : isSelected
                       ? 'bg-[#ff3b30]/10 border-[#ff3b30] text-[#ff3b30]'
-                      : 'opacity-40 border-black/[0.06] bg-white text-[#86868b]'
-                    : 'bg-white border-black/[0.08] text-[#1d1d1f] hover:border-black/[0.2] hover:shadow-sm active:scale-95'
+                      : 'opacity-40 border-black/[0.06] dark:border-white/[0.06] bg-white dark:bg-[#1c1c1e] text-[#86868b]'
+                    : 'bg-white dark:bg-[#1c1c1e] border-black/[0.08] dark:border-white/[0.1] text-[var(--foreground)] hover:border-black/[0.2] dark:hover:border-white/[0.2] hover:shadow-sm active:scale-95'
                 }`}
               >
                 <span className="text-sm font-semibold">{opt.label}</span>
@@ -229,9 +229,9 @@ export function StoryQuiz() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-black/[0.06] shadow-sm w-full"
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm w-full transition-colors duration-300"
             >
-              <p className="text-xs sm:text-sm text-[#1d1d1f] font-normal leading-relaxed text-center sm:text-left">
+              <p className="text-xs sm:text-sm text-[var(--foreground)] font-normal leading-relaxed text-center sm:text-left">
                 <strong className={q.options[selectedOpt].isCorrect ? 'text-[#34c759]' : 'text-[#ff3b30]'}>
                   {q.options[selectedOpt].isCorrect ? 'Correct. ' : 'Incorrect. '}
                 </strong>
@@ -240,7 +240,7 @@ export function StoryQuiz() {
 
               <button
                 onClick={handleNext}
-                className="flex-shrink-0 px-6 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black transition-all cursor-pointer shadow"
+                className="flex-shrink-0 px-6 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] transition-all cursor-pointer shadow"
               >
                 {currentIdx === QUIZ_ITEMS.length - 1 ? 'Restart Quiz' : 'Next Question →'}
               </button>

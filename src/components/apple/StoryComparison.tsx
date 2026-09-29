@@ -91,7 +91,7 @@ export function StoryComparison() {
         <span className="text-xs font-semibold tracking-widest uppercase text-[#0071e3]">
           Synchronous Face-Off
         </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#1d1d1f]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[var(--foreground)]">
           Same sequence. Different decisions.
         </h2>
         <p className="text-base sm:text-xl text-[#86868b] font-normal max-w-xl">
@@ -117,10 +117,10 @@ export function StoryComparison() {
                   }}
                   className={`flex-shrink-0 w-11 h-14 sm:w-12 sm:h-15 rounded-2xl flex flex-col items-center justify-center font-mono transition-all duration-200 active:scale-95 cursor-pointer ${
                     isCurrent
-                      ? 'bg-[#1d1d1f] text-white shadow-lg scale-105'
+                      ? 'bg-[#1d1d1f] dark:bg-white text-white dark:text-black shadow-lg scale-105'
                       : isPast
-                      ? 'bg-[#f5f5f7] text-[#1d1d1f]'
-                      : 'bg-white border border-black/[0.08] text-[#86868b]'
+                      ? 'bg-[#f5f5f7] dark:bg-[#2c2c2e] text-[var(--foreground)]'
+                      : 'bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.1] text-[#86868b]'
                   }`}
                 >
                   <span className="text-[9px] opacity-60">#{idx + 1}</span>
@@ -161,11 +161,11 @@ export function StoryComparison() {
         {/* Dual Memory Systems */}
         <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {/* FIFO Tower (Left) */}
-          <div className="p-6 rounded-[2rem] bg-white border border-black/[0.06] shadow-sm flex flex-col gap-4">
-            <div className="flex items-center justify-between pb-3 border-b border-black/[0.06]">
+          <div className="p-6 rounded-[2rem] bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm flex flex-col gap-4">
+            <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#0071e3]" />
-                <h3 className="font-semibold text-lg text-[#1d1d1f]">FIFO</h3>
+                <h3 className="font-semibold text-lg text-[var(--foreground)]">FIFO</h3>
               </div>
               <div className="flex items-center gap-3 text-xs font-mono">
                 <span className="text-[#ff3b30]">
@@ -195,7 +195,7 @@ export function StoryComparison() {
                     }`}
                   >
                     <span className="text-[10px] font-mono text-[#86868b]">F{frameIdx + 1}</span>
-                    <span className="text-2xl font-semibold font-mono text-[#1d1d1f] my-auto">
+                    <span className="text-2xl font-semibold font-mono text-[var(--foreground)] my-auto">
                       {pageNumber ?? '—'}
                     </span>
                     <span className="text-[9px] font-mono text-[#86868b]">
@@ -212,11 +212,11 @@ export function StoryComparison() {
           </div>
 
           {/* LRU Tower (Right) */}
-          <div className="p-6 rounded-[2rem] bg-white border border-black/[0.06] shadow-sm flex flex-col gap-4">
-            <div className="flex items-center justify-between pb-3 border-b border-black/[0.06]">
+          <div className="p-6 rounded-[2rem] bg-white dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.1] shadow-sm flex flex-col gap-4">
+            <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#34c759]" />
-                <h3 className="font-semibold text-lg text-[#1d1d1f]">LRU</h3>
+                <h3 className="font-semibold text-lg text-[var(--foreground)]">LRU</h3>
               </div>
               <div className="flex items-center gap-3 text-xs font-mono">
                 <span className="text-[#ff3b30]">
@@ -246,7 +246,7 @@ export function StoryComparison() {
                     }`}
                   >
                     <span className="text-[10px] font-mono text-[#86868b]">F{frameIdx + 1}</span>
-                    <span className="text-2xl font-semibold font-mono text-[#1d1d1f] my-auto">
+                    <span className="text-2xl font-semibold font-mono text-[var(--foreground)] my-auto">
                       {pageNumber ?? '—'}
                     </span>
                     <span className="text-[9px] font-mono text-[#86868b]">
@@ -267,7 +267,7 @@ export function StoryComparison() {
         <div className="flex items-center gap-3 pt-2">
           <button
             onClick={handleReset}
-            className="p-3 rounded-full bg-white border border-black/[0.08] text-[#1d1d1f] hover:bg-black/[0.05] transition-all cursor-pointer"
+            className="p-3 rounded-full bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.1] text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-all cursor-pointer"
             title="Reset"
           >
             <RotateCcw className="w-4 h-4" />
@@ -276,7 +276,7 @@ export function StoryComparison() {
           <button
             onClick={handlePrev}
             disabled={currentStepIndex < 0}
-            className="px-5 py-2.5 rounded-full bg-white border border-black/[0.08] text-xs font-medium text-[#1d1d1f] hover:bg-black/[0.05] disabled:opacity-30 transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-full bg-white dark:bg-[#1c1c1e] border border-black/[0.08] dark:border-white/[0.1] text-xs font-medium text-[var(--foreground)] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] disabled:opacity-30 transition-all cursor-pointer"
           >
             Previous
           </button>
@@ -284,7 +284,7 @@ export function StoryComparison() {
           <button
             onClick={handleNext}
             disabled={currentStepIndex >= referenceString.length - 1}
-            className="px-6 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs font-medium hover:bg-black disabled:opacity-30 transition-all cursor-pointer shadow"
+            className="px-6 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-[#f5f5f7] disabled:opacity-30 transition-all cursor-pointer shadow"
           >
             Step Both Algorithms →
           </button>

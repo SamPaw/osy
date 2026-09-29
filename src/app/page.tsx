@@ -1,5 +1,5 @@
-import { PresentationShell } from '@/components/PresentationShell';
+import { StoryOrchestrator } from '@/components/apple/StoryOrchestrator';
 
 export default function Home() {
-  return <PresentationShell />;
+  return <StoryOrchestrator />;
 }

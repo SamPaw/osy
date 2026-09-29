@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#090a0f",
+  themeColor: "#fbfbfd",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -23,32 +23,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
   description:
-    "Interactive smart whiteboard presentation and real-time visual simulator for Operating Systems: FIFO and LRU page replacement algorithms, Belady's anomaly, and live comparative analysis.",
-  keywords: [
-    "Operating Systems",
-    "Page Replacement Algorithms",
-    "FIFO",
-    "LRU",
-    "Belady's Anomaly",
-    "Virtual Memory",
-    "PlateSight",
-    "Interactive Simulator",
-  ],
+    "An Apple-inspired interactive educational experience for Operating Systems. Explore FIFO and LRU page replacement algorithms, physical memory dynamics, and Belady's anomaly.",
   authors: [{ name: "PlateSight" }],
   metadataBase: new URL("https://os.platesight.in"),
   openGraph: {
-    title: "FIFO vs LRU Page Replacement Algorithms | PlateSight OS",
+    title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
     description:
-      "Interactive smart whiteboard presentation and real-time visual simulator for Operating Systems.",
+      "When memory runs out, which page should leave? An interactive exploration of FIFO and LRU.",
     url: "https://os.platesight.in",
     siteName: "PlateSight OS",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FIFO vs LRU Page Replacement Algorithms | PlateSight OS",
+    title: "Page Replacement Algorithms — FIFO vs LRU | PlateSight OS",
     description:
-      "Interactive smart whiteboard presentation and real-time visual simulator for Operating Systems.",
+      "When memory runs out, which page should leave? An interactive exploration of FIFO and LRU.",
   },
 };
 
@@ -62,7 +52,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#090a0f] text-gray-100 selection:bg-indigo-500/30 selection:text-white">
+      <body className="min-h-full bg-[#fbfbfd] text-[#1d1d1f] selection:bg-[#0071e3]/15 selection:text-[#0071e3]">
         {children}
       </body>
     </html>
